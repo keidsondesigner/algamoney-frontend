@@ -26,13 +26,13 @@
     [value]="products"
     [tableStyle]="{ 'min-width': '50rem' }"
     [paginator]="true"
-    [rows]="8"
+    [rows]="7"
   >
     <ng-template pTemplate="header">
         <tr>
             <th>Nome</th>
             <th>Categoria</th>
-            <th>Quantidade</th>
+            <th>Vencimento</th>
             <th>Valor</th>
             <th style="width: 5rem">
               Ações
@@ -43,8 +43,8 @@
         <tr>
             <td>{{ product.name }}</td>
             <td>{{ product.category }}</td>
-            <td>{{ product.quantity }}</td>
-            <td [style.color]="product.inventoryStatus === 'DESPESA' ? 'red' : 'blue'">{{ product.price }}</td>
+            <td>{{ product.expiryDate | date: 'dd/MM/yyyy' }}</td>
+            <td [style.color]="product.inventoryStatus === 'DESPESA' ? '#d45472' : '#5472d4'">{{ product.price | currency: 'BRL' }}</td>
             <td class="flex">
               <button class="mr-3 p-button-text" type="button" pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top"></button>
               <button class="p-button-danger p-button-text" type="button" pButton icon="pi pi-trash" pTooltip="Excluír" tooltipPosition="top"></button>
