@@ -1,0 +1,19 @@
+.container {
+  padding: 20px;
+}
+@media screen and (min-width: 1200px) {
+  .container {
+    width: 1170px;
+    margin: 0 auto;
+  }
+}
+
+.btn-success {
+  background-color: #71af3a;
+  border-color: #71af3a;
+}
+.btn-success:hover {
+  background-color: #639c31;
+  border-color: #639c31;
+}
+
