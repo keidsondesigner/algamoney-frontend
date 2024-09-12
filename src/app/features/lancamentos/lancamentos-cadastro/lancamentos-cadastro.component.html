@@ -1,0 +1,59 @@
+<section class="container">
+  <h1 class="mb-6">
+    Novo Lançamento
+  </h1>
+
+  <form class="grid" (ngSubmit)="submitForm()">
+    <div class="col-12 sm:col-6 lg:col-6">
+      <div class="flex align-items-center gap-3">
+        <div>
+          <label htmlFor="descricao">Descrição</label>
+          <input class="w-full" id="descricao" type="text" pInputText />
+        </div>
+        <div>
+          <label htmlFor="valor">Valor</label>
+          <input class="w-full" id="valor" type="number" pInputText />
+        </div>
+      </div>
+    </div>
+    <div class="col-12 sm:col-6 lg:col-6">
+      <div class="flex align-items-center gap-3">
+        <div>
+          <label htmlFor="dataRecebimento">Data recebimento</label>
+          <p-calendar id="dataRecebimento" [showIcon]="true"></p-calendar>
+        </div>
+        <div>
+          <label htmlFor="dataVencimento">Data vencimento</label>
+          <p-calendar id="dataVencimento" [showIcon]="true"></p-calendar>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 sm:col-6 lg:col-6">
+      <div>
+        <label htmlFor="observacao">Observação</label>
+        <textarea id="observacao" rows="6" class="w-full" pInputTextarea ></textarea>
+      </div>
+    </div>
+    <div class="col-12 sm:col-6 lg:col-6">
+      <div class="flex align-items-center gap-3 col-12 p-0">
+        <div class="w-full">
+          <label htmlFor="categoria">Selecionar categoria</label>
+          <p-dropdown id="categoria" [style]="{'width':'100%'}" [options]="cities" optionLabel="name"></p-dropdown>
+        </div>
+        <div class="w-full">
+          <label htmlFor="pessoa">Selecionar pessoa</label>
+          <p-dropdown id="pessoa" [style]="{'width':'100%'}" [options]="cities" optionLabel="name"></p-dropdown>
+        </div>
+      </div>
+      <div class="col-12 sm:col-12 lg:col-12 mt-1 px-0">
+        <div class="p-fluid col-12 px-0">
+          <p-selectButton [options]="stateOptions" optionLabel="label" optionValue="value"></p-selectButton>
+        </div>
+      </div>
+      <div class="flex align-items-center gap-3">
+        <button class="w-full p-button-secondary" pButton label="Voltar"></button>
+        <button class="w-full btn-success" pButton type="submit" label="Salvar" pTooltip="Salvar lançamento" tooltipPosition="top"></button>
+      </div>
+    </div>
+  </form>
+</section>
