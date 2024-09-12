@@ -1,0 +1,66 @@
+<section class="container">
+  <h1 class="mb-6">
+    Nova Pessoa
+  </h1>
+
+  <form class="grid justify-content-end" (ngSubmit)="submitForm()">
+    <div class="col-12 sm:col-6 lg:col-6">
+      <div class="flex-column md:flex-row gap-3">
+        <div class="col mb-3 p-0">
+          <label htmlFor="nome">Nome</label>
+          <input class="w-full" id="nome" type="text" pInputText />
+        </div>
+        <div class="col p-0">
+          <label htmlFor="logradouro">Logradouro</label>
+          <input class="w-full" id="logradouro" type="number" pInputText />
+        </div>
+      </div>
+    </div>
+    <div class="col-12 sm:col-6 lg:col-6">
+      <div class="flex-column md:flex-row gap-3">
+        <div class="col mb-3 p-0">
+          <label htmlFor="numero">Número</label>
+          <input class="w-full" id="numero" type="number" pInputText />
+        </div>
+        <div class="col p-0">
+          <label htmlFor="completo">Completo</label>
+          <input class="w-full" id="completo" type="text" pInputText />
+        </div>
+      </div>
+    </div>
+    <div class="col-12 sm:col-6 lg:col-6">
+      <div class="flex-column md:flex-row gap-3">
+        <div class="col mb-3 p-0">
+          <label htmlFor="bairro">Bairro</label>
+          <input class="w-full" id="bairro" type="text" pInputText />
+        </div>
+        <div class="col p-0">
+          <label htmlFor="cep">CEP</label>
+          <input class="w-full" id="cep" type="number" pInputText />
+        </div>
+      </div>
+    </div>
+    <div class="col-12 sm:col-6 lg:col-6">
+      <div class="flex-column md:flex-row gap-3">
+        <div class="col mb-3 p-0">
+          <label htmlFor="cidade">Cidade</label>
+          <input class="w-full" id="cidade" type="text" pInputText />
+        </div>
+        <div class="col p-0">
+          <label htmlFor="estado">Estado</label>
+          <input class="w-full" id="estado" type="text" pInputText />
+        </div>
+      </div>
+    </div>
+    <div class="col-12 sm:col-6 lg:col-6">
+      <div class="flex gap-3 mt-2">
+        <div class="col p-0">
+          <button class="col-6 w-full p-button-secondary" pButton label="Voltar"></button>
+        </div>
+        <div class="col p-0">
+          <button class="col-6 w-full pr-1 btn-success" pButton type="submit" label="Salvar" pTooltip="Salvar pessoa" tooltipPosition="top"></button>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>
