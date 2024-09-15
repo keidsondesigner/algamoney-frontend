@@ -1,10 +1,35 @@
 <div class="sidenav">
   <ul>
-    <li *ngFor="let item of menuItems">
-      <a [routerLink]="item.routerLink" routerLinkActive="active">
-        <i [class]="item.icon"></i>
-        <span>{{ item.label }}</span>
+    <!-- Menu Pessoas -->
+    <li>
+      <a class="menu-item" (click)="toggleSubMenu('pessoas')">
+        <i class="pi pi-users"></i>
+        <span [ngClass]="{'active-span': showSubMenu === 'pessoas'}">Pessoas</span>
       </a>
+      <ul class="submenu" [ngClass]="{'show': showSubMenu === 'pessoas'}">
+        <li *ngFor="let item of pessoasItems">
+          <a [routerLink]="item.routerLink" routerLinkActive="active">
+            <i [class]="item.icon"></i>
+            <span>{{ item.label }}</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+
+    <!-- Menu Lançamentos -->
+    <li>
+      <a class="menu-item" (click)="toggleSubMenu('lancamentos')">
+        <i class="pi pi-calendar"></i>
+        <span [ngClass]="{'active-span': showSubMenu === 'lancamentos'}">Lançamentos</span>
+      </a>
+      <ul class="submenu" [ngClass]="{'show': showSubMenu === 'lancamentos'}">
+        <li *ngFor="let item of lancamentosItems">
+          <a [routerLink]="item.routerLink" routerLinkActive="active">
+            <i [class]="item.icon"></i>
+            <span>{{ item.label }}</span>
+          </a>
+        </li>
+      </ul>
     </li>
   </ul>
 </div>

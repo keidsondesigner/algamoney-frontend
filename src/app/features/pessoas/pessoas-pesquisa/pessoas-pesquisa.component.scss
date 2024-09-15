@@ -1,6 +1,7 @@
 .container {
   padding: 20px;
 }
+
 @media screen and (min-width: 1200px) {
   .container {
     width: 1170px;
@@ -8,11 +9,24 @@
   }
 }
 
+
 .btn-success {
   background-color: #47b487;
   border-color: #47b487;
 }
+
 .btn-success:hover {
   background-color: #44ab80;
   border-color: #44ab80;
+}
+
+.p-table-responsive {
+  overflow-x: auto; /* Adiciona rolagem horizontal se necessário */
+  -webkit-overflow-scrolling: touch; /* Melhora o desempenho da rolagem em dispositivos móveis */
+  width: 100%; /* Garante que o contêiner ocupe toda a largura disponível */
+}
+
+.p-table-responsive table {
+  width: 100%; /* Garante que a tabela ocupe toda a largura do contêiner */
+  border-collapse: collapse; /* Remove espaços entre células */
 }

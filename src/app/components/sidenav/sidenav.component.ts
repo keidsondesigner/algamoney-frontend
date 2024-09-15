@@ -6,26 +6,35 @@ import { Component } from '@angular/core';
   styleUrls: ['./sidenav.component.scss'],
 })
 export class SidenavComponent {
-  menuItems = [
-    {
-      routerLink: '/lancamentos/pesquisa',
-      icon: 'pi pi-home',
-      label: 'Lan pesquisa',
-    },
-    {
-      routerLink: '/lancamentos/cadastro',
-      icon: 'pi pi-info-circle',
-      label: 'Lan cadastro',
-    },
+  showSubMenu: string | null = null;
+
+  pessoasItems = [
     {
       routerLink: '/pessoas/pesquisa',
-      icon: 'pi pi-home',
-      label: 'Pessoa pesquisa',
+      icon: 'pi pi-search',
+      label: 'Pesquisar',
     },
     {
       routerLink: '/pessoas/cadastro',
-      icon: 'pi pi-info-circle',
-      label: 'Pessoa cadastro',
+      icon: 'pi pi-file-edit',
+      label: 'Cadastrar',
     },
   ];
+
+  lancamentosItems = [
+    {
+      routerLink: '/lancamentos/pesquisa',
+      icon: 'pi pi-search',
+      label: 'Pesquisar',
+    },
+    {
+      routerLink: '/lancamentos/cadastro',
+      icon: 'pi pi-file-edit',
+      label: 'Cadastrar',
+    },
+  ];
+
+  toggleSubMenu(menu: string) {
+    this.showSubMenu = this.showSubMenu === menu ? null : menu;
+  }
 }

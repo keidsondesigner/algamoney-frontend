@@ -1,13 +1,42 @@
 .sidenav {
   width: 250px;
-  height: 100%;
   background-color: #f8f9fa;
+  height: 100vh;
   padding: 1rem;
 
   ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
+  }
+
+  .menu-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    border-radius: 6px;
+    cursor: pointer;
+
+    i {
+      margin-right: 8px;
+    }
+
+    &:hover {
+      background-color: #e9ecef;
+    }
+  }
+
+  .submenu {
+    list-style-type: none;
+    margin-top: 8px;
+    padding-left: 20px;
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-20px);
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
 
     li {
       margin-bottom: 0.5rem;
@@ -21,13 +50,14 @@
         text-decoration: none;
         transition: background-color 0.3s;
 
-        &:hover, &.active {
+        &:hover,
+        &.active {
           background-color: #e9ecef;
           border-radius: 6px;
         }
 
         &.active {
-            font-weight: 600;
+          font-weight: 600;
         }
 
         i {
@@ -35,5 +65,17 @@
         }
       }
     }
+  }
+
+  .submenu.show {
+    max-height: 500px;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* classe para deixar o <span> vermelho quando ativo */
+  .active-span {
+    color: #5472d4;
+    font-weight: 600;
   }
 }
