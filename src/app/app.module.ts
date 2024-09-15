@@ -5,30 +5,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ButtonModule } from 'primeng/button';
-import { InputTextModule } from 'primeng/inputtext';
-import { CalendarModule } from 'primeng/calendar';
-import { TableModule } from 'primeng/table';
-import { TooltipModule } from 'primeng/tooltip';
-import { SidebarModule } from 'primeng/sidebar';
-import { InputTextareaModule } from 'primeng/inputtextarea';
-import { DropdownModule } from 'primeng/dropdown';
-import { SelectButtonModule } from 'primeng/selectbutton';
 
-import { LancamentosPesquisaComponent } from './features/lancamentos/lancamentos-pesquisa/lancamentos-pesquisa.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { PessoasPesquisaComponent } from './features/pessoas/pessoas-pesquisa/pessoas-pesquisa.component';
-import { LancamentosCadastroComponent } from './features/lancamentos/lancamentos-cadastro/lancamentos-cadastro.component';
-import { PessoasCadastroComponent } from './features/pessoas/pessoas-cadastro/pessoas-cadastro.component';
+import { AuthModule } from './auth/auth.module';
+import { FeaturesModule } from './features/features.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LancamentosPesquisaComponent,
-    NavbarComponent,
-    PessoasPesquisaComponent,
-    LancamentosCadastroComponent,
-    PessoasCadastroComponent
   ],
   imports: [
     BrowserModule,
@@ -36,16 +20,9 @@ import { PessoasCadastroComponent } from './features/pessoas/pessoas-cadastro/pe
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    InputTextModule,
-    CalendarModule,
-    ButtonModule,
-    TableModule,
-    TooltipModule,
-    SidebarModule,
-    InputTextareaModule,
-    DropdownModule,
-    SelectButtonModule
-
+    SharedModule,
+    AuthModule,
+    FeaturesModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
