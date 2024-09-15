@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PrimeNGConfig } from 'primeng/api';
+import { SidenavService } from '../../shared/services/sidenav.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,9 +9,9 @@ import { PrimeNGConfig } from 'primeng/api';
 export class NavbarComponent {
   visibleSidebar: boolean = false;
 
-  constructor(private primengConfig: PrimeNGConfig) {}
+  constructor(private sidenavService: SidenavService) {}
 
-  ngOnInit() {
-    this.primengConfig.ripple = true;
+  onToggleSidebar() {
+    this.sidenavService.toggleSidenav();
   }
 }

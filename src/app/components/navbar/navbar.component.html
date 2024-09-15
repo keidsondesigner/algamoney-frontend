@@ -1,7 +1,7 @@
-<p-sidebar [(visible)]="visibleSidebar" [baseZIndex]="10000">
-  <h1 style="font-weight:normal">Left Sidebar</h1>
-  <p-button type="button" (click)="visibleSidebar = false" label="Save" styleClass="p-button-success"></p-button>
-  <p-button type="button" (click)="visibleSidebar = false" label="Cancel" styleClass="p-button-secondary"></p-button>
-</p-sidebar>
-
-<p-button type="button" (click)="visibleSidebar = true" icon="pi pi-th-large"></p-button>
+<nav class="flex justify-content-between">
+  <div class="flex gap-2">
+    <a routerLink="/auth/login">Login</a>
+    <a routerLink="/auth/register">Register</a>
+  </div>
+  <button pButton icon="pi pi-bars" (click)="onToggleSidebar()" class="p-button-text toggle-btn"></button>
+</nav>
