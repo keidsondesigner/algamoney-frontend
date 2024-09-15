@@ -1,9 +1,10 @@
 <nav class="flex justify-content-between">
+  <button pButton (click)="onToggleSidebar()" class="p-button-text toggle-btn">
+    <i class="pi pi-th-large" style="font-size: 1.5rem"></i>
+  </button>
   <div class="flex gap-2">
     <a routerLink="/auth/login">Login</a>
     <a routerLink="/auth/register">Register</a>
   </div>
-  <button pButton (click)="onToggleSidebar()" class="p-button-text toggle-btn">
-    <i class="pi pi-th-large" style="font-size: 1.5rem"></i>
-  </button>
 </nav>
+
