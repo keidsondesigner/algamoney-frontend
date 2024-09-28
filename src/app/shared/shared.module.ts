@@ -13,7 +13,6 @@ import { SidenavService } from '../core/services/sidenav.service';
     RouterModule,
     PrimengModModule
   ],
-  providers: [SidenavService],
   exports: [NavbarComponent, SidenavComponent, PrimengModModule]
 })
 export class SharedModule { }

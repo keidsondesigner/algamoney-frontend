@@ -10,27 +10,27 @@ export class SidenavComponent {
 
   pessoasItems = [
     {
-      routerLink: '/pessoas/pesquisa',
-      icon: 'pi pi-search',
-      label: 'Pesquisar',
-    },
-    {
       routerLink: '/pessoas/cadastro',
       icon: 'pi pi-file-edit',
       label: 'Cadastrar',
+    },
+    {
+      routerLink: '/pessoas/pesquisa',
+      icon: 'pi pi-search',
+      label: 'Pesquisar',
     },
   ];
 
   lancamentosItems = [
     {
-      routerLink: '/lancamentos/pesquisa',
-      icon: 'pi pi-search',
-      label: 'Pesquisar',
-    },
-    {
       routerLink: '/lancamentos/cadastro',
       icon: 'pi pi-file-edit',
       label: 'Cadastrar',
+    },
+    {
+      routerLink: '/lancamentos/pesquisa',
+      icon: 'pi pi-search',
+      label: 'Pesquisar',
     },
   ];
 

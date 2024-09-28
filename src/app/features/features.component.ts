@@ -18,7 +18,6 @@ import { Observable } from 'rxjs';
       </div>
     </section>
   `,
-  providers: [SidenavService]
 })
 export class FeaturesComponent implements OnInit {
   isSidebarVisible$: Observable<boolean>;
