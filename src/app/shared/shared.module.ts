@@ -4,7 +4,6 @@ import { NavbarComponent } from '../components/navbar/navbar.component';
 import { SidenavComponent } from '../components/sidenav/sidenav.component';
 import { PrimengModModule } from './primeng-mod/primeng-mod.module';
 import { RouterModule } from '@angular/router';
-import { SidenavService } from '../core/services/sidenav.service';
 
 @NgModule({
   declarations: [NavbarComponent, SidenavComponent],
