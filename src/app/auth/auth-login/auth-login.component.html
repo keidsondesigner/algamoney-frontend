@@ -1,1 +1,67 @@
-<p>auth-login works!</p>
+<form class="container" [formGroup]="formLogin" (ngSubmit)="onSubmit()">
+  <h1
+    class="mt-2 text-center text-2xl font-bold leading-9"
+  >
+    Faça login em sua conta
+  </h1>
+  <section>
+    <div class="col mb-3 p-0">
+      <label htmlFor="email">Email</label>
+      <input
+        class="w-full"
+        id="email"
+        type="email"
+        pInputText
+        formControlName="email"
+        [ngClass]="{ 'is-invalid': submitted && formControls['email'].errors }"
+        placeholder="Digite seu email"
+        required
+      />
+      <div
+        *ngIf="formControls['email'].invalid && (formControls['email'].dirty || formControls['email'].touched)"
+        class="text-pink-600"
+      >
+        <span *ngIf="formControls['email'].errors?.['required']">
+          email é obrigatório
+        </span>
+        <span *ngIf="formControls['email'].errors?.['email']">
+          email deve ser válido
+        </span>
+      </div>
+    </div>
+    <div class="col p-0">
+      <label htmlFor="senha">Senha</label>
+      <input
+        class="w-full"
+        id="senha"
+        type="password"
+        pInputText
+        formControlName="senha"
+        [ngClass]="{ 'is-invalid': submitted && formControls['senha'].errors }"
+        placeholder="Digite a senha"
+        required
+      />
+      <div
+        *ngIf="
+          formControls['senha'].invalid && (formControls['senha'].dirty || formControls['senha'].touched)
+        "
+        class="text-pink-600"
+      >
+        <span *ngIf="formControls['senha'].errors?.['required']">
+          senha é obrigatório
+        </span>
+        <span *ngIf="formControls['senha'].errors?.['minlength']">
+          senha deve ter pelo menos 6 caracteres
+        </span>
+      </div>
+    </div>
+  </section>
+  <button
+    class="w-full flex justify-content-center mt-4" 
+    pButton
+    type="submit"
+    [label]="loading ? 'Carregando' : 'Entrar'" 
+    [disabled]="!formLogin.valid"
+  >
+  </button>
+</form>
