@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { SidenavService } from '../../core/services/sidenav.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -9,9 +10,18 @@ import { SidenavService } from '../../core/services/sidenav.service';
 export class NavbarComponent {
   visibleSidebar: boolean = false;
 
-  constructor(private sidenavService: SidenavService) {}
+  constructor(
+    private sidenavService: SidenavService,
+    private router: Router
+  ) {}
 
   onToggleSidebar() {
     this.sidenavService.toggleSidenav();
+  }
+
+  logout() {
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('email');
+    this.router.navigate(['/auth/login']);
   }
 }
