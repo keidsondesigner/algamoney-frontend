@@ -36,6 +36,7 @@ export class AuthLoginComponent {
   get formControls() { return this.formLogin.controls; }
 
   onSubmit() {
+    alert('entrou na função')
     this.submitted = true;
 
     // Para aqui se form for invalid
@@ -58,6 +59,7 @@ export class AuthLoginComponent {
         console.log('sucesso ao efetuar login');
       },
       error: (e: HttpErrorResponse) => {
+        alert(JSON.stringify(e)); 
         this.loading = false;
         this.authService.handleError(e);
       }

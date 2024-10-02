@@ -8,7 +8,8 @@ import { UserRespoonse } from '../models/user-response.model';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8080';
+  // private apiUrl = 'http://localhost:8080';
+  private apiUrl = 'https://algamoney-api-j1pt.onrender.com';
   
   constructor(private http: HttpClient) { }
   
