@@ -5,7 +5,7 @@ import { LancamentosRoutingModule } from './lancamentos-routing.module';
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
 import { LancamentosCadastroComponent } from './lancamentos-cadastro/lancamentos-cadastro.component';
 import { PrimengModModule } from 'src/app/shared/primeng-mod/primeng-mod.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -18,6 +18,7 @@ import { FormsModule } from '@angular/forms';
     LancamentosRoutingModule,
     PrimengModModule,
     FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class LancamentosModule { }

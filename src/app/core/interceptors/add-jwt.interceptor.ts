@@ -28,12 +28,12 @@ export class AddJwtInterceptor implements HttpInterceptor {
         if(error.status === 401) {
           console.log(error);
           //this.toastrNotifier.error('token não fornecido', 'Error ao efetuar login!');
-          console.log('token não fornecido', 'Error ao efetuar login!')
+          console.log('Token não fornecido', 'Error ao efetuar login!')
           this.router.navigate(['/auth/login']);
         } else if(error.status ===  498) {
           this.router.navigate(['/auth/login']);
           // this.toastrNotifier.error('Efetue o login corretamente', 'Token inválido!');
-          console.log('Efetue o login corretamente', 'Token inválido!')
+          console.log('Token inválido!', 'Error ao efetuar login!')
         }
         return throwError(() => error);
       })

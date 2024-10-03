@@ -1,4 +1,8 @@
+import { catchError, debounceTime, distinctUntilChanged, filter, finalize, Observable, of, startWith, switchMap, tap } from 'rxjs';
+import { LancamentosService } from './../services/lancamentos.service';
 import { Component } from '@angular/core';
+import { ListarLancamentosResponse } from '../models/user-response.model';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-lancamentos-pesquisa',
@@ -6,153 +10,34 @@ import { Component } from '@angular/core';
   styleUrls: ['./lancamentos-pesquisa.component.scss']
 })
 export class LancamentosPesquisaComponent {
-  value = '';
+  searchTerm = new FormControl('');
   dateStart: Date = new Date();
   dateEnd: Date = new Date();
 
-  products: any[] = [
-    {
-      id: '1010',
-      code: 'qwe34sdg',
-      name: 'Laptop Pro',
-      description: 'High-performance laptop',
-      expiryDate: new Date(2024, 9, 7),
-      paymentDate: null,
-      image: 'laptop-pro.jpg',
-      price: 2500.0,
-      category: 'Computers',
-      quantity: 15,
-      inventoryStatus: 'RECEITA',
-      rating: 4,
-    },
-    {
-      id: '1020',
-      code: 'yui78khj',
-      name: 'Gaming Chair',
-      description: 'Ergonomic chair for gaming',
-      expiryDate: new Date(2024, 9, 7),
-      paymentDate: null,
-      image: 'gaming-chair.jpg',
-      price: 199.99,
-      category: 'Furniture',
-      quantity: 8,
-      inventoryStatus: 'DESPESA',
-      rating: 5,
-    },
-    {
-      id: '1030',
-      code: 'zxc90vbn',
-      name: 'Wireless Mouse',
-      description: 'Smooth and responsive mouse',
-      expiryDate: new Date(2024, 9, 7),
-      paymentDate: null,
-      image: 'wireless-mouse.jpg',
-      price: 29.99,
-      category: 'Accessories',
-      quantity: 30,
-      inventoryStatus: 'RECEITA',
-      rating: 4,
-    },
-    {
-      id: '1040',
-      code: 'asd34ghj',
-      name: 'Smartphone XL',
-      description: 'Latest smartphone with big screen',
-      expiryDate: new Date(2024, 9, 7),
-      paymentDate: null,
-      image: 'smartphone-xl.jpg',
-      price: 899.99,
-      category: 'Phones',
-      quantity: 25,
-      inventoryStatus: 'RECEITA',
-      rating: 5,
-    },
-    {
-      id: '1050',
-      code: 'fgh56klm',
-      name: 'Noise Cancelling Headphones',
-      description: 'Best-in-class noise cancellation',
-      expiryDate: new Date(2024, 9, 7),
-      paymentDate: null,
-      image: 'headphones.jpg',
-      price: 299.99,
-      category: 'Audio',
-      quantity: 10,
-      inventoryStatus: 'DESPESA',
-      rating: 5,
-    },
-    {
-      id: '1060',
-      code: 'jkl23zxc',
-      name: 'Smartwatch Series 5',
-      description: 'Wearable smart device',
-      expiryDate: new Date(2024, 9, 7),
-      paymentDate: null,
-      image: 'smartwatch.jpg',
-      price: 399.99,
-      category: 'Accessories',
-      quantity: 20,
-      inventoryStatus: 'RECEITA',
-      rating: 4,
-    },
-    {
-      id: '1070',
-      code: 'vbn56mnb',
-      name: '4K Ultra HD TV',
-      description: 'Crisp and clear 4K TV',
-      expiryDate: new Date(2024, 9, 7),
-      paymentDate: null,
-      image: '4k-tv.jpg',
-      price: 1200.0,
-      category: 'Electronics',
-      quantity: 5,
-      inventoryStatus: 'RECEITA',
-      rating: 5,
-    },
-    {
-      id: '1080',
-      code: 'qaz67plm',
-      name: 'Bluetooth Speaker',
-      description: 'Portable and powerful speaker',
-      expiryDate: new Date(2024, 9, 7),
-      paymentDate: null,
-      image: 'bluetooth-speaker.jpg',
-      price: 89.99,
-      category: 'Audio',
-      quantity: 18,
-      inventoryStatus: 'DESPESA',
-      rating: 4,
-    },
-    {
-      id: '1070',
-      code: 'vbn56mnb',
-      name: '4K Ultra HD TV',
-      description: 'Crisp and clear 4K TV',
-      expiryDate: new Date(2024, 9, 7),
-      paymentDate: null,
-      image: '4k-tv.jpg',
-      price: 1200.0,
-      category: 'Electronics',
-      quantity: 5,
-      inventoryStatus: 'RECEITA',
-      rating: 5,
-    },
-    {
-      id: '1080',
-      code: 'qaz67plm',
-      name: 'Bluetooth Speaker',
-      description: 'Portable and powerful speaker',
-      expiryDate: new Date(2024, 9, 7),
-      paymentDate: null,
-      image: 'bluetooth-speaker.jpg',
-      price: 89.99,
-      category: 'Audio',
-      quantity: 18,
-      inventoryStatus: 'DESPESA',
-      rating: 4,
-    },
-  ];
+  lancamentos$!: Observable<ListarLancamentosResponse[]>;
 
-  constructor() {}
+  constructor(private _lancamentosService: LancamentosService) { }
 
+  ngOnInit(): void {
+    this.lancamentos$ = this.searchTerm.valueChanges.pipe(
+      startWith(''), // Iniciar com valor input vazio
+      debounceTime(200), // Aguardar 300ms após a última digitação
+      distinctUntilChanged(), // Evitar chamadas repetidas com o mesmo valor
+      switchMap((termo: string | null) => this.manipularBusca(termo)) // Refatorar lógica de busca
+    );
+  }
+
+  private manipularBusca(termo: string | null): Observable<ListarLancamentosResponse[]> {
+    if (termo && termo.length > 2) {
+      return this._lancamentosService.buscarPorDescricao(termo).pipe(
+        tap(response => console.log('termo dados filtrados', response)),
+        catchError(error => {
+          console.error('Erro ao buscar lançamentos', error);
+          return of([]); // Retornar array vazio em caso de erro
+        })
+      );
+    } else {
+      return this._lancamentosService.listarLancamentos(); // Carregar todos os dados se o input estiver vazio ou menor que 3 caracteres
+    }
+  }
 }

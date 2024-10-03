@@ -5,11 +5,11 @@
 
   <section class="grid">
     <div class="col-12 sm:col-6 lg:col-4">
-      <input class="w-12" type="text" placeholder="Buscar lançamento" pInputText [(ngModel)]="value" />
+      <input class="w-12" type="text" placeholder="Buscar lançamento" pInputText [formControl]="searchTerm" /> <!-- Alterar para formControl -->
     </div>
     <div class="col-12 sm:col-6 lg:col-5">
       <div class="flex align-items-center">
-        <p-calendar [(ngModel)]="dateStart" [showIcon]="true" pTooltip="Data inical" tooltipPosition="top"></p-calendar>
+        <p-calendar [(ngModel)]="dateStart" [showIcon]="true" pTooltip="Data inicial" tooltipPosition="top"></p-calendar>
         <label class="mx-2 font-semibold">Até</label>
         <p-calendar [(ngModel)]="dateEnd" [showIcon]="true" pTooltip="Data final" tooltipPosition="top"></p-calendar>
       </div>
@@ -21,9 +21,22 @@
       <button class="w-full btn-success" pButton type="submit" label="Novo" pTooltip="Novo lançamento" tooltipPosition="top"></button>
     </div>
   </section>
-
-  <p-table
-    [value]="products"
+  <ng-template #loading>
+    <div class="flex flex-column align-items-center">
+      <p class="mt-4">
+        Carregando dados
+      </p>
+      <div class="loading-container">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    </div> 
+  </ng-template>
+  <p-table 
+    *ngIf="lancamentos$ | async as lancamentos; else loading"
+    [value]="lancamentos"
     [tableStyle]="{ 'min-width': '50rem' }"
     [paginator]="true"
     [rows]="7"
@@ -39,15 +52,15 @@
             </th>
         </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-product>
+    <ng-template pTemplate="body" let-lancamento>
         <tr>
-            <td>{{ product.name }}</td>
-            <td>{{ product.category }}</td>
-            <td>{{ product.expiryDate | date: 'dd/MM/yyyy' }}</td>
-            <td [style.color]="product.inventoryStatus === 'DESPESA' ? '#d45472' : '#5472d4'">{{ product.price | currency: 'BRL' }}</td>
+            <td>{{ lancamento.descricao }}</td>
+            <td>{{ lancamento.categoria.nome }}</td>
+            <td>{{ lancamento.dataVencimento | date: 'dd/MM/yyyy' }}</td>
+            <td [style.color]="lancamento.tipo === 'DESPESA' ? '#d45472' : '#5472d4'">{{ lancamento.valor | currency: 'BRL' }}</td>
             <td class="flex">
               <button class="mr-3 p-button-text" type="button" pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top"></button>
-              <button class="p-button-danger p-button-text" type="button" pButton icon="pi pi-trash" pTooltip="Excluír" tooltipPosition="top"></button>
+              <button class="p-button-danger p-button-text" type="button" pButton icon="pi pi-trash" pTooltip="Excluir" tooltipPosition="top"></button>
             </td>
         </tr>
     </ng-template>
