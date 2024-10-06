@@ -11,8 +11,8 @@ import { FormControl } from '@angular/forms';
 })
 export class LancamentosPesquisaComponent {
   searchTerm = new FormControl('');
-  dateStart: Date = new Date();
-  dateEnd: Date = new Date();
+  dateStart!: Date;
+  dateEnd!: Date;
 
   lancamentos$!: Observable<ListarLancamentosResponse[]>;
 

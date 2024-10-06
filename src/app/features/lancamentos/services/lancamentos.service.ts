@@ -7,7 +7,8 @@ import { ListarLancamentosResponse } from '../models/user-response.model';
   providedIn: 'root',
 })
 export class LancamentosService {
-  private baseUrl = 'http://localhost:8080';
+  // private baseUrl = 'http://localhost:8080';
+  private baseUrl = 'https://algamoney-api-j1pt.onrender.com';
 
   private cacheSubject = new BehaviorSubject<{ [key: string]: ListarLancamentosResponse[] }>({});
   private cache$ = this.cacheSubject.asObservable();
