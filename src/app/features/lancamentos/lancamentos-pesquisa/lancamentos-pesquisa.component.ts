@@ -15,6 +15,7 @@ export class LancamentosPesquisaComponent {
   dateEnd!: Date;
 
   lancamentos$!: Observable<ListarLancamentosResponse[]>;
+  isLoading: boolean = false; // Variável para controlar o estado de carregamento
 
   constructor(private _lancamentosService: LancamentosService) { }
 
@@ -23,7 +24,12 @@ export class LancamentosPesquisaComponent {
       startWith(''), // Iniciar com valor input vazio
       debounceTime(200), // Aguardar 300ms após a última digitação
       distinctUntilChanged(), // Evitar chamadas repetidas com o mesmo valor
-      switchMap((termo: string | null) => this.manipularBusca(termo)) // Refatorar lógica de busca
+      switchMap((termo: string | null) => {
+        this.isLoading = true; // Iniciar carregamento
+        return this.manipularBusca(termo).pipe(
+          finalize(() => this.isLoading = false) // Finalizar carregamento
+        );
+      })
     );
   }
 

@@ -1,6 +1,11 @@
+:host ::ng-deep .p-calendar {
+  width: 100%;
+}
+
 .container {
   padding: 20px;
 }
+
 @media screen and (min-width: 1200px) {
   .container {
     width: 1170px;
@@ -79,9 +84,4 @@
     transform: scale(0.7);
     background-color: #558df5;
   }
-}
-///***** elemento loading ****\\\
-
-.skeleton-loader {
-  margin-top: 30px;
 }
