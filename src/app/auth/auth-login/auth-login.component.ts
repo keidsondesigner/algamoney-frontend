@@ -36,7 +36,6 @@ export class AuthLoginComponent {
   get formControls() { return this.formLogin.controls; }
 
   onSubmit() {
-    alert('entrou na função')
     this.submitted = true;
 
     // Para aqui se form for invalid
@@ -47,12 +46,12 @@ export class AuthLoginComponent {
     }
 
     this.loading = true;
-    this.authService.login(this.formLogin.value).pipe(first()).subscribe({
+    this.authService.login(this.formLogin.getRawValue()).pipe(first()).subscribe({
       next: (result: any) => {
         this.loading = false;
         console.log('result', result);
-        sessionStorage.setItem('token', result.token);
-        sessionStorage.setItem('email', result.email);
+        // sessionStorage.setItem('token', result.token);
+        // sessionStorage.setItem('email', result.email);
         this.router.navigate(['lancamentos/pesquisa']);
 
         //this.toastrNotifier.success('token criado com sucesso.', 'Login efetuado!');

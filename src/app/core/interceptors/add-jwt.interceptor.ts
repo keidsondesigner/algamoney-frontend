@@ -8,19 +8,19 @@ import {
 } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable()
 export class AddJwtInterceptor implements HttpInterceptor {
 
-  // constructor(private router: Router, private toastrNotifier: ToastrService) {}
-  constructor(private router: Router) {}
+  constructor(private router: Router, private cookieService: CookieService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const token = sessionStorage.getItem('token');
+    const token = this.cookieService.get('token');
     console.log('aqui token', token);
 
     if(token) {
-      request = request.clone({ setHeaders: { Authorization: 'Bearer ' + token }})
+      request = request.clone({ setHeaders: { Authorization: 'Bearer ' + token }});
     }
 
     return next.handle(request).pipe(
@@ -28,12 +28,12 @@ export class AddJwtInterceptor implements HttpInterceptor {
         if(error.status === 401) {
           console.log(error);
           //this.toastrNotifier.error('token não fornecido', 'Error ao efetuar login!');
-          console.log('Token não fornecido', 'Error ao efetuar login!')
+          console.log('Token não fornecido', 'Error ao efetuar login!');
           this.router.navigate(['/auth/login']);
         } else if(error.status ===  498) {
           this.router.navigate(['/auth/login']);
           // this.toastrNotifier.error('Efetue o login corretamente', 'Token inválido!');
-          console.log('Token inválido!', 'Error ao efetuar login!')
+          console.log('Token inválido!', 'Error ao efetuar login!');
         }
         return throwError(() => error);
       })
