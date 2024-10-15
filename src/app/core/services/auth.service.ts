@@ -4,6 +4,12 @@ import { Observable, tap } from 'rxjs';
 import { User } from '../models/user.model';
 import { UserRespoonse } from '../models/user-response.model';
 import { CookieService } from 'ngx-cookie-service';
+import { jwtDecode, JwtPayload  } from 'jwt-decode';
+
+interface CustomJwtPayload extends JwtPayload {
+  permissoes: string[];
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +25,12 @@ export class AuthService {
       tap(result => {
         // Definindo o cookie com o token
         this.cookieService.set('token', result.token);
+        this.cookieService.set('email', result.email);
+
+        // Decodificando o token para acessar as permissões
+        const decodedToken = jwtDecode<CustomJwtPayload>(result.token);
+        console.log('Permissões:', decodedToken.permissoes); // Acessando as permissões
+        sessionStorage.setItem('permissoes', JSON.stringify(decodedToken.permissoes));
       })
     );
   }

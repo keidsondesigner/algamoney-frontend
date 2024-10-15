@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { SidenavService } from '../../core/services/sidenav.service';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,7 +13,8 @@ export class NavbarComponent {
 
   constructor(
     private sidenavService: SidenavService,
-    private router: Router
+    private cookieService: CookieService,
+    private router: Router,
   ) {}
 
   onToggleSidebar() {
@@ -20,8 +22,8 @@ export class NavbarComponent {
   }
 
   logout() {
-    sessionStorage.removeItem('token');
-    sessionStorage.removeItem('email');
+    this.cookieService.delete('token');
+    this.cookieService.delete('email');
     this.router.navigate(['/auth/login']);
   }
 }
