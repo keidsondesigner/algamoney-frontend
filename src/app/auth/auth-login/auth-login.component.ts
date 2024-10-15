@@ -37,6 +37,7 @@ export class AuthLoginComponent {
 
   onSubmit() {
     this.submitted = true;
+    this.loading = true;
 
     // Para aqui se form for invalid
     if (this.formLogin.invalid) {
@@ -45,7 +46,6 @@ export class AuthLoginComponent {
       return;
     }
 
-    this.loading = true;
     this.authService.login(this.formLogin.getRawValue()).pipe(first()).subscribe({
       next: (result: any) => {
         this.loading = false;

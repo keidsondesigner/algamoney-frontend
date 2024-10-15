@@ -16,7 +16,7 @@
       <button class="w-full" pButton type="submit" label="Filtrar por data"></button>
     </div>
     <div class="col-12 sm:col-6 lg:col-1">
-      <button class="w-full btn-success" pButton type="submit" label="Novo" pTooltip="Novo lançamento" tooltipPosition="top"></button>
+      <button class="w-full btn-success" pButton type="submit" label="Novo" pTooltip="Novo lançamento" tooltipPosition="top" *ngIf="hasRoleLancamentoCadastrar"></button>
     </div>
   </section>
 

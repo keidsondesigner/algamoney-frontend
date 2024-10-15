@@ -24,6 +24,7 @@ export class NavbarComponent {
   logout() {
     this.cookieService.delete('token');
     this.cookieService.delete('email');
+    sessionStorage.removeItem('permissoes');
     this.router.navigate(['/auth/login']);
   }
 }

@@ -34,6 +34,11 @@ export class AuthService {
       })
     );
   }
+
+  hasPermission(permission: string): boolean {
+    const permissoes = JSON.parse(sessionStorage.getItem('permissoes') || '[]');
+    return permissoes.includes(permission);
+  }
   
   handleError(e: HttpErrorResponse) {
     console.log('httpError: ', e);

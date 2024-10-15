@@ -3,6 +3,9 @@ import { LancamentosService } from './../services/lancamentos.service';
 import { Component } from '@angular/core';
 import { ListarLancamentosResponse } from '../models/user-response.model';
 import { FormControl } from '@angular/forms';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { Roles } from 'src/app/core/enums/roles';
+
 
 @Component({
   selector: 'app-lancamentos-pesquisa',
@@ -14,20 +17,24 @@ export class LancamentosPesquisaComponent {
   dateStart!: Date;
   dateEnd!: Date;
 
+  hasRoleLancamentoCadastrar: boolean;
   lancamentos$!: Observable<ListarLancamentosResponse[]>;
-  isLoading: boolean = false; // Variável para controlar o estado de carregamento
+  isLoading!: boolean; // Variável para controlar o estado de carregamento
 
-  constructor(private _lancamentosService: LancamentosService) { }
+  constructor(private _lancamentosService: LancamentosService, private _authService: AuthService) { 
+    this.hasRoleLancamentoCadastrar = this._authService.hasPermission(Roles.LANCAMENTO_CADASTRAR); 
+  }
 
   ngOnInit(): void {
     this.lancamentos$ = this.searchTerm.valueChanges.pipe(
       startWith(''), // Iniciar com valor input vazio
       debounceTime(200), // Aguardar 300ms após a última digitação
       distinctUntilChanged(), // Evitar chamadas repetidas com o mesmo valor
+      tap(() => this.isLoading = true), // Iniciar o loading antes da busca
       switchMap((termo: string | null) => {
         this.isLoading = true; // Iniciar carregamento
         return this.manipularBusca(termo).pipe(
-          finalize(() => this.isLoading = false) // Finalizar carregamento
+          finalize(() => this.isLoading = false) // Finalizar loading após a busca
         );
       })
     );

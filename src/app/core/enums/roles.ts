@@ -1,0 +1,3 @@
+export enum Roles {
+    LANCAMENTO_CADASTRAR = 'ROLE_LANCAMENTO_CADASTRAR',
+}
