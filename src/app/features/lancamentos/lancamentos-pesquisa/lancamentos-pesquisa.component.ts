@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 import { ListarLancamentosResponse } from '../models/user-response.model';
 import { FormControl } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { Roles } from 'src/app/core/enums/roles';
+import { ROLES } from 'src/app/core/enums/roles';
 
 
 @Component({
@@ -22,7 +22,7 @@ export class LancamentosPesquisaComponent {
   isLoading!: boolean; // Variável para controlar o estado de carregamento
 
   constructor(private _lancamentosService: LancamentosService, private _authService: AuthService) { 
-    this.hasRoleLancamentoCadastrar = this._authService.hasPermission(Roles.LANCAMENTO_CADASTRAR); 
+    this.hasRoleLancamentoCadastrar = this._authService.hasPermission(ROLES.LANCAMENTO_CADASTRAR); 
   }
 
   ngOnInit(): void {
