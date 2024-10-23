@@ -28,7 +28,7 @@ export class AuthLoginComponent {
   initForm() {
     this.formLogin = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      senha: ['',  [Validators.required, Validators.minLength(5)]]
+      senha: ['',  [Validators.required, Validators.minLength(4)]]
   });
   }
 
