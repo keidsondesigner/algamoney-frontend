@@ -12,11 +12,11 @@
         <p-calendar class="w-full"[(ngModel)]="dateEnd" [showIcon]="true" placeholder="Data final"></p-calendar>
       </div>
     </div>
-    <div class="col-12 sm:col-6 lg:col-2">
-      <button class="w-full" pButton type="submit" label="Filtrar por data"></button>
+    <div class="flex-1 p-2">
+      <button class="w-full" pButton type="submit" label="Filtrar" pTooltip="Filtrar por data" tooltipPosition="top"></button>
     </div>
-    <div class="col-12 sm:col-6 lg:col-1">
-      <button class="w-full btn-success" pButton type="submit" label="Novo" pTooltip="Novo lançamento" tooltipPosition="top" *ngIf="hasRoleLancamentoCadastrar"></button>
+    <div class="flex-1 p-2" *ngIf="hasRoleLancamentoCadastrar">
+      <button class="w-full btn-success" pButton type="submit" label="Novo" pTooltip="Novo lançamento" tooltipPosition="top"></button>
     </div>
   </section>
 

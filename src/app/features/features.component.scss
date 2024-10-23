@@ -33,11 +33,12 @@
   flex: 1;
   overflow-y: auto;
   transition: margin-left 0.3s ease;
+
+  min-width: 375px;
 }
 
 .sidenav.visible + .main-content .content-area {
   margin-left: 250px;
-  min-width: 375px;
 }
 
 .main-content.full-width .content-area {
