@@ -17,15 +17,16 @@ export class LancamentosPesquisaComponent {
   dateStart!: Date;
   dateEnd!: Date;
 
-  hasRoleLancamentoCadastrar: boolean;
   lancamentos$!: Observable<ListarLancamentosResponse[]>;
   isLoading!: boolean; // Variável para controlar o estado de carregamento
+  ROLE_LANCAMENTO_CADASTRAR: boolean = false;
+  ROLE_LANCAMENTO_PESQUISAR: boolean = false;
+  ROLE_LANCAMENTO_REMOVER: boolean = false;
 
-  constructor(private _lancamentosService: LancamentosService, private _authService: AuthService) { 
-    this.hasRoleLancamentoCadastrar = this._authService.hasPermission(ROLES.LANCAMENTO_CADASTRAR); 
-  }
+  constructor(private _lancamentosService: LancamentosService, private _authService: AuthService) { }
 
   ngOnInit(): void {
+
     this.lancamentos$ = this.searchTerm.valueChanges.pipe(
       startWith(''), // Iniciar com valor input vazio
       debounceTime(300), // Aguardar 300ms após a última digitação
@@ -38,9 +39,12 @@ export class LancamentosPesquisaComponent {
         );
       })
     );
+
+    this.carregarPermissoes();
+
   }
 
-  private manipularBusca(termo: string | null): Observable<ListarLancamentosResponse[]> {
+  manipularBusca(termo: string | null): Observable<ListarLancamentosResponse[]> {
     if (termo && termo.length > 2) {
       return this._lancamentosService.buscarPorDescricao(termo).pipe(
         tap(response => console.log('termo dados filtrados', response)),
@@ -52,5 +56,11 @@ export class LancamentosPesquisaComponent {
     } else {
       return this._lancamentosService.listarLancamentos(); // Carregar todos os dados se o input estiver vazio ou menor que 3 caracteres
     }
+  }
+
+  carregarPermissoes() {
+    this.ROLE_LANCAMENTO_CADASTRAR = this._authService.hasPermission(ROLES.LANCAMENTO_CADASTRAR);
+    this.ROLE_LANCAMENTO_PESQUISAR = this._authService.hasPermission(ROLES.LANCAMENTO_PESQUISAR);
+    this.ROLE_LANCAMENTO_REMOVER = this._authService.hasPermission(ROLES.LANCAMENTO_REMOVER);
   }
 }
