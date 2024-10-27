@@ -48,15 +48,15 @@ export class AuthLoginComponent {
 
     this.authService.login(this.formLogin.getRawValue()).pipe(first()).subscribe({
       next: (result: any) => {
+        // console.log('login result', result);
         this.loading = false;
-        console.log('result', result);
         this.router.navigate(['lancamentos/pesquisa']);
 
         //this.toastrNotifier.success('token criado com sucesso.', 'Login efetuado!');
         console.log('sucesso ao efetuar login');
       },
       error: (e: HttpErrorResponse) => {
-        alert(JSON.stringify(e)); 
+        alert(JSON.stringify(e));
         this.loading = false;
         this.authService.handleError(e);
       }

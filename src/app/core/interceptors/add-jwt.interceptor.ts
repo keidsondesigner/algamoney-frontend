@@ -16,7 +16,7 @@ export class AddJwtInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const token = sessionStorage.getItem('token');
-    console.log('aqui token', token);
+    // console.log('aqui token', token);
 
     if(token) {
       request = request.clone({ setHeaders: { Authorization: 'Bearer ' + token }});
