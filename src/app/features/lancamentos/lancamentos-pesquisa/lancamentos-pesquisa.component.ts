@@ -28,7 +28,7 @@ export class LancamentosPesquisaComponent {
   ngOnInit(): void {
     this.lancamentos$ = this.searchTerm.valueChanges.pipe(
       startWith(''), // Iniciar com valor input vazio
-      debounceTime(200), // Aguardar 300ms após a última digitação
+      debounceTime(300), // Aguardar 300ms após a última digitação
       distinctUntilChanged(), // Evitar chamadas repetidas com o mesmo valor
       tap(() => this.isLoading = true), // Iniciar o loading antes da busca
       switchMap((termo: string | null) => {

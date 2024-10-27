@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { User } from '../models/user.model';
 import { UserRespoonse } from '../models/user-response.model';
-import { CookieService } from 'ngx-cookie-service';
 import { jwtDecode, JwtPayload  } from 'jwt-decode';
 
 interface CustomJwtPayload extends JwtPayload {
@@ -19,26 +18,25 @@ export class AuthService {
   // private apiUrl = 'http://localhost:8080';
   private apiUrl = 'https://algamoney-api-j1pt.onrender.com';
   
-  constructor(private http: HttpClient, private cookieService: CookieService) { }
+  constructor(private http: HttpClient) { }
   
   login(user: User): Observable<UserRespoonse> {
     return this.http.post<UserRespoonse>(`${this.apiUrl}/auth/login`, user, { withCredentials: true }).pipe(
       tap(result => {
         // Definindo o cookie com o token
-        this.cookieService.set('token', result.token);
-        this.cookieService.set('email', result.email);
+        sessionStorage.setItem('token', result.token);
+        sessionStorage.setItem('email', result.email);
 
         // Decodificando o token para acessar as permissões
         const decodedTokenPermissao = jwtDecode<CustomJwtPayload>(result.token);
         console.log('Permissões:', decodedTokenPermissao.permissoes); // Acessando as permissões
         sessionStorage.setItem('permissoes', JSON.stringify(decodedTokenPermissao.permissoes));
-
-        // Decodificando o token para acessar o email
-        const decodedTokenEmail = jwtDecode<CustomJwtPayload>(result.token);
-        console.log('Email:', decodedTokenEmail.email); // Acessando o email
-        sessionStorage.setItem('email', JSON.stringify(decodedTokenEmail.email));
       })
     );
+  }
+
+  isAuthenticated(): boolean {
+    return !!sessionStorage.getItem('token');
   }
 
   hasPermission(permission: string): boolean {

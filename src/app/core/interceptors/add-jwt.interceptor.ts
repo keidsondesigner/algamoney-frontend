@@ -8,15 +8,14 @@ import {
 } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
 
 @Injectable()
 export class AddJwtInterceptor implements HttpInterceptor {
 
-  constructor(private router: Router, private cookieService: CookieService) {}
+  constructor(private router: Router) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const token = this.cookieService.get('token');
+    const token = sessionStorage.getItem('token');
     console.log('aqui token', token);
 
     if(token) {
