@@ -8,6 +8,7 @@ import { jwtDecode, JwtPayload  } from 'jwt-decode';
 
 interface CustomJwtPayload extends JwtPayload {
   permissoes: string[];
+  email: string;
 }
 
 
@@ -28,9 +29,14 @@ export class AuthService {
         this.cookieService.set('email', result.email);
 
         // Decodificando o token para acessar as permissões
-        const decodedToken = jwtDecode<CustomJwtPayload>(result.token);
-        console.log('Permissões:', decodedToken.permissoes); // Acessando as permissões
-        sessionStorage.setItem('permissoes', JSON.stringify(decodedToken.permissoes));
+        const decodedTokenPermissao = jwtDecode<CustomJwtPayload>(result.token);
+        console.log('Permissões:', decodedTokenPermissao.permissoes); // Acessando as permissões
+        sessionStorage.setItem('permissoes', JSON.stringify(decodedTokenPermissao.permissoes));
+
+        // Decodificando o token para acessar o email
+        const decodedTokenEmail = jwtDecode<CustomJwtPayload>(result.token);
+        console.log('Email:', decodedTokenEmail.email); // Acessando o email
+        sessionStorage.setItem('email', JSON.stringify(decodedTokenEmail.email));
       })
     );
   }

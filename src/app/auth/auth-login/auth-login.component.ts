@@ -50,8 +50,6 @@ export class AuthLoginComponent {
       next: (result: any) => {
         this.loading = false;
         console.log('result', result);
-        // sessionStorage.setItem('token', result.token);
-        // sessionStorage.setItem('email', result.email);
         this.router.navigate(['lancamentos/pesquisa']);
 
         //this.toastrNotifier.success('token criado com sucesso.', 'Login efetuado!');
